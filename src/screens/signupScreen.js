@@ -1,22 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton, Title } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { collection, addDoc } from "firebase/firestore"; 
 
 import FormButton from '../components/formButton';
 import FormInput from '../components/formInput';
-import Loading from '../components/loading';
-import { AuthContext } from '../navigation/authProvider';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from '../../firebaseConfig';
+import { login } from '../redux/auth-slice';
+
 
 export default function SignupScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { register, loading } = useContext(AuthContext);
-
-  if (loading) {
-    return <Loading />;
-  }
+  const auth = getAuth();
 
   return (
       <View style={styles.container}>
@@ -43,7 +44,23 @@ export default function SignupScreen({ navigation }) {
             title="Signup"
             modeValue="contained"
             labelStyle={styles.loginButtonLabel}
-            onPress={() => register(displayName, email, password)}
+            onPress={async () => {
+              await createUserWithEmailAndPassword(auth, email, password).then(async userCredential => {
+                const authenticatedUser = {
+                  uid: userCredential.user.uid,
+                  displayName: displayName,
+                  email: userCredential.user.email,
+                }
+                console.log(authenticatedUser);
+                const docRef = await addDoc(collection(db, "users"), authenticatedUser)
+                  .then(() => {
+                    dispatch(login(authenticatedUser));
+                  })
+                  .catch((error) => {
+                    console.error("Error adding document: ", error);
+                  });
+              })
+            }}
         />
         <IconButton
             icon="keyboard-backspace"
