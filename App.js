@@ -1,9 +1,10 @@
 import React from 'react';
+import { AppRegistry } from 'react-native';
 
-import Providers from './src/navigation';
-// why is routes causing render error?
-import Routes from './src/navigation/routes';
-
-export default function App() {
-  return <Providers />;
+import App from './src/index';
+// connected application - top down
+export default function ConnectedApp() {
+  return <App />;
 }
+
+AppRegistry.registerComponent('App', () => ConnectedApp);
