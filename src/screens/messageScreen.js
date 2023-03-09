@@ -71,7 +71,7 @@ export default function MessageScreen() {
                                 dispatch(modifyMessage(newMessageList));
                             });
                     }
-                    setValue('');        
+                    setValue('');
                 }}
             />
         </View>
