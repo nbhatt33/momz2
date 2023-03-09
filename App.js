@@ -55,7 +55,7 @@ export default function ConnectedApp() {
             title: 'You left the app!',
             body: 'Come back and talk to mom!',
           },
-          trigger: { seconds: 5,},
+          trigger: { seconds:60*3}, 
         });
       } else if (Platform.OS === 'android' && nextAppState === 'background') {
         Notifications.scheduleNotificationAsync({
@@ -63,7 +63,7 @@ export default function ConnectedApp() {
             title: 'You left the app!',
             body: 'Come back and talk to mom!',
           },
-          trigger: { seconds: 5,},
+          trigger: { seconds:60*3},
         });
       }
     });
