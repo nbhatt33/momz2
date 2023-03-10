@@ -1,4 +1,3 @@
-import {styles} from '../../App';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import * as dialogue from '../dataObjects/dialogue';
 import * as userPrompts from '../dataObjects/userPrompts';
@@ -12,8 +11,11 @@ export const displayDialogue = (d: dialogue.Dialogue) => {
     );
 }
 
-export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentDialogue) => {
-    //Display HTML buttons in a row with each uPs[i].textOptions[0]
+export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentDialogue) => { //TODO: make {prompts, next} a type
+    if (uPsAndNext == null) {
+        console.log("No user prompts to display")
+        return <Text></Text>;
+    }
 
     const uPs = uPsAndNext.map((uPAndNext) => uPAndNext.prompts); // TODO: consider not mapping to improve performance
     const nextDialogue = uPsAndNext.map((uPAndNext) => uPAndNext.next);
@@ -28,11 +30,12 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
         const randomIndex = Math.floor(Math.random() * uPs[i].textOptions.length);
         htmlButtonArray.push(
             <Button
+                key={i}
                 onPress={() => {
-                    console.log("Button pressed: " + uPs[i].textOptions[randomIndex]);
-                    console.log("Random index: " + randomIndex);
-                    console.log("uPs[i].nextAction: " + uPs[i].nextAction);
-                    console.log("nextDialogue[i]: " + nextDialogue[i]);
+                    // console.log("Button pressed: " + uPs[i].textOptions[randomIndex]);
+                    // console.log("Random index: " + randomIndex);
+                    // console.log("uPs[i].nextAction: " + uPs[i].nextAction);
+                    // console.log("nextDialogue[i]: " + nextDialogue[i]);
                     if (uPs[i].nextAction) {
                         uPs[i].nextAction.action();
                     }
@@ -45,11 +48,6 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
             />
         );
     }
-    // return (
-    //     <div style={btnGroupStyle.btnGroup}>
-    //         {htmlButtonArray}
-    //     </div>
-    // );
     return (
         <View>
             {htmlButtonArray}
@@ -68,4 +66,13 @@ const btnGroupStyle = StyleSheet.create({
         // cursor: pointer; /* Pointer/hand icon */
         // float: left; /* Float the buttons side by side */
     }
+});
+
+export const styles = StyleSheet.create({ //TODO: Make style file
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

@@ -1,25 +1,21 @@
-//import * as dialogue from "./dialogue";
 import * as action from "./actions";
+import { eventTags } from "./eventTags";
 
 export interface UserPrompt {
     readonly textOptions: string[]; //TODO: Decide if array is necessary
-    // readonly nextDialogue?: dialogue.Dialogue;
     readonly nextAction?: action.Action;
 }
 
 export const feelingGood: UserPrompt = {
-    textOptions: ["I'm feeling good!"],
-    // nextDialogue: dialogue.responseFeelingGood
+    textOptions: ["I'm feeling good!", "I'm feeling great!", "I'm feeling awesome!"],
 };
 
 export const feelingOkay: UserPrompt = {
-    textOptions: ["I'm only feeling okay."],
-    // nextDialogue: dialogue.responseFeelingNotGood
+    textOptions: ["I'm only feeling okay.", "I'm feeling okay.", "I'm feeling alright."],
 }
 
 export const feelingBad: UserPrompt = {
-    textOptions: ["I'm feeling bad."],
-    // nextDialogue: dialogue.responseFeelingNotGood
+    textOptions: ["I'm feeling bad.", "I'm feeling not so good.", "I'm feeling terrible."],
 }
 
 export const addEvent: UserPrompt = {
@@ -31,3 +27,10 @@ export const addTasks: UserPrompt = {
     textOptions: ["Add tasks"],
     nextAction: action.addTasks
 }
+
+export const addTag: UserPrompt[] = action.tags.map((tag, i) => {
+    return {
+        textOptions: [eventTags[i].name],
+        nextAction: tag
+    }
+});

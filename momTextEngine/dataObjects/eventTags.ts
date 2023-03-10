@@ -8,6 +8,7 @@ const defaultEventTag: EventTag = {name : "Default"};
 const course: EventTag = {name : "Course"};
 const assignment: EventTag = {name : "Assignment"};
 const exam: EventTag = {name : "Exam"};
+const work: EventTag = {name : "Work"};
 
 //TODO: Decide status of these tags
 /*const work: EventTag = {name : "Work"};
@@ -17,9 +18,10 @@ const holiday: EventTag = {name : "Holiday"};
 const appointment: EventTag = {name : "Appointment"};*/
 
 
-const eventTags: EventTag[] = [
+export const eventTags: EventTag[] = [
     defaultEventTag,
     course,
     assignment,
-    exam
+    exam,
+    work
 ];
