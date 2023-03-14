@@ -10,12 +10,19 @@ import * as visualGenerator from '../../momTextEngine/code/visualGenerator';
 
 import { getMessages, modifyMessage } from '../redux/message-slice';
 
-export default function MessageScreen() {
-    const [currentdialogue, setCurrentDialogue] = useState<dialogue.Dialogue>(dialogue.firstWelcome);
-    const sentMessages: Message[] = [];
+interface DialogueAndMessages {
+    readonly currdialogue: dialogue.Dialogue;
+    readonly  sentMessages: Message[];
+}
 
-    const randomIndex = Math.floor(Math.random() * currentdialogue.textOptions.length);
-    sentMessages.push({text: currentdialogue.textOptions[randomIndex], saidByMom: true});
+
+
+export default function MessageScreen() {
+    const initalDialogue: dialogue.Dialogue = dialogue.firstWelcome;
+    const randomIndex = Math.floor(Math.random() * initalDialogue.textOptions.length);
+    const [currentdialogueAndMessages, setCurrentdialogueAndMessages] = useState<DialogueAndMessages>({currdialogue: initalDialogue, sentMessages: [{text: initalDialogue.textOptions[randomIndex], saidByMom: true}]});
+
+    const sentMessages = currentdialogueAndMessages.sentMessages;
 
     //Display the messages
     let htmlContent = sentMessages.map((message, i) => {
@@ -26,8 +33,12 @@ export default function MessageScreen() {
         }
     });
     //Display options to user (if any)
-    if (currentdialogue.promptsAndNext) {
-        htmlContent.push(visualGenerator.displayUserPrompts(currentdialogue.promptsAndNext, setCurrentDialogue, sentMessages));
+    const currentdialogue = currentdialogueAndMessages.currdialogue;
+    console.log("currentDialogue:", currentdialogue);
+    if (currentdialogue && currentdialogue.promptsAndNext) {
+        htmlContent.push(visualGenerator.displayUserPrompts(currentdialogue.promptsAndNext, setCurrentdialogueAndMessages, currentdialogueAndMessages.sentMessages));
+    } else {
+        console.log("No prompts");
     }
 
     return (
@@ -45,16 +56,7 @@ export default function MessageScreen() {
 
 
 
-
-
-
-
-
-
-
-
-
-
+}
 
 //   const dispatch = useDispatch();
 //   const authSlice = useSelector((state) => state.auth);
@@ -126,11 +128,14 @@ export default function MessageScreen() {
 //         </View>
 //       </View>
 //   );
-}
+
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5',
     height: '100%',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
   },
 });
