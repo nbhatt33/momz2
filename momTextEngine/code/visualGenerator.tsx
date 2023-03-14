@@ -3,11 +3,13 @@ import * as dialogue from '../dataObjects/dialogue';
 import * as userPrompts from '../dataObjects/userPrompts';
 import { onOptionPress } from './textEngine';
 import { Message } from '../dataObjects/message';
+import PromptButtom from '../../src/components/promptButton';
+
 
 export const displayDialogue = (d: dialogue.Dialogue) => {
     const randomIndex = Math.floor(Math.random() * d.textOptions.length);
     return (
-        <View style = {styles.container}>
+        <View style = {styles.firstWelcome}>
             <Text>{d.textOptions[randomIndex]}</Text>
         </View> 
     );
@@ -15,7 +17,7 @@ export const displayDialogue = (d: dialogue.Dialogue) => {
 
 export const displayDialogueFromText = (t: string) => {
     return (
-        <View style = {styles.container}>
+        <View style = {styles.firstWelcome}>
             <Text>{t}</Text>
         </View> 
     );
@@ -23,8 +25,8 @@ export const displayDialogueFromText = (t: string) => {
 
 export const displaySentUserPromptsFromText = (t: string) => {
     return (
-        <View style = {styles.container}>
-            <Text>{t}</Text>
+        <View style = {styles.firstWelcome}>
+            <Text style={styles.firstWelcome}>{t}</Text>
         </View> 
     );
 }
@@ -47,10 +49,17 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
     for (let i = 0; i < uPs.length; i++) {
         const randomIndex = Math.floor(Math.random() * uPs[i].textOptions.length); 
         htmlButtonArray.push(
-            <Button
+            // <Button 
+            //     key={i}
+            //     onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentDialogue, sentMessages)}
+                
+            //     title={uPs[i].textOptions[randomIndex]}
+            // />
+            <PromptButtom 
                 key={i}
-                onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentdialogueAndMessages, sentMessages)}
+                modeValue="contained" 
                 title={uPs[i].textOptions[randomIndex]}
+                onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentdialogueAndMessages, sentMessages)}
             />
         );
     }
@@ -61,31 +70,29 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
     );
 }
 
-// style messages to left of screen
 
 
-// style messages to right of screen
-
-
-const btnGroupStyle = StyleSheet.create({
-    btnGroup: {
-        backgroundColor: '#04AA6D', /* Green background */
-        alignItems: 'center',
-        justifyContent: 'center',
-        // border: 1px solid green; /* Green border */
-        // color: white; /* White text */
-        // padding: 10px 24px; /* Some padding */
-        // cursor: pointer; /* Pointer/hand icon */
-        // float: left; /* Float the buttons side by side */
-    }
-});
 
 export const styles = StyleSheet.create({ //TODO: Make style file
-    container: {
+    // container: {
+    //     flex: 1,
+    //     backgroundColor: 'green',
+    //     // alignItems: 'center',
+    //     // justifyContent: 'center',
+    //     // margin: 10,
+    //     padding: 10,
+
+
+    // },
+
+    firstWelcome: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: 'green',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // margin: 10,
+        padding: 10,
     },
+    
 });
 

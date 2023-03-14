@@ -1,6 +1,6 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { Button, FlatList, StyleSheet, TextInput, View, Text } from 'react-native';
+import { Button, FlatList, StyleSheet, TextInput, View, Text, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth, db } from '../../firebaseConfig';
 import { Message } from '../../momTextEngine/dataObjects/message';
@@ -42,12 +42,16 @@ export default function MessageScreen() {
     }
 
     return (
-        <View style={styles.container}>
-        <FlatList
-            data={htmlContent}
-            renderItem={({ item }) => <Text>{item}</Text>}
-        />
-        </View>
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={htmlContent}
+                renderItem={({ item }) => <Text style={styles.firstWelcome}>{item}</Text>}
+            />
+            <SafeAreaView style={styles.userPrompts}>
+                {userPrompts}
+            </SafeAreaView>
+        
+        </SafeAreaView>
 
     );
 
@@ -132,10 +136,40 @@ export default function MessageScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'pink',
+    flex: 1,
     height: '100%',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
+    width: '100%',
+    
+
   },
+  item: {
+    // alignContent: 'center',
+    // justifyContent: 'center',
+    // textAlign: 'center',
+    fontSize: 32,
+    backgroundColor: 'white',
+  },
+  userPrompts: {
+    // backgroundColor: 'white',
+    alignItems: 'center',
+    borderColor: 'black',
+    backgroundColor: 'white',
+  },
+  momText: {
+    backgroundColor: 'white',
+    alignItems: 'flex-start',
+  },
+  firstWelcome: {
+    height: '100%',
+    width: '50%',
+    // paddingTop: 10,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1,
+    // borderRadius: 50,
+  }
+  
+  
 });
