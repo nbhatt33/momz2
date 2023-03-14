@@ -35,8 +35,10 @@ export default function MessageScreen() {
     //Display options to user (if any)
     const currentdialogue = currentdialogueAndMessages.currdialogue;
     console.log("currentDialogue:", currentdialogue);
+
+    let userPrompts;
     if (currentdialogue && currentdialogue.promptsAndNext) {
-        htmlContent.push(visualGenerator.displayUserPrompts(currentdialogue.promptsAndNext, setCurrentdialogueAndMessages, currentdialogueAndMessages.sentMessages));
+        userPrompts = visualGenerator.displayUserPrompts(currentdialogue.promptsAndNext, setCurrentdialogueAndMessages, currentdialogueAndMessages.sentMessages);
     } else {
         console.log("No prompts");
     }
