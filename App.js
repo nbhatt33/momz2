@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 // import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, Text, View, AppState, Platform} from 'react-native';
+import {StyleSheet, Text, View, AppState, Platform, AppRegistry} from 'react-native';
 import * as textEngine from './momTextEngine/code/textEngine';
 import * as Notifications from 'expo-notifications';
+
+import App from './src/index';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -12,7 +14,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function App() {
+export default function ConnectedApp() {
 
   useEffect(() => {
 
@@ -25,7 +27,7 @@ export default function App() {
           },
           trigger: { seconds: 5,},
         }).catch((err) => {
-          console.error("Got error: ", err);
+          console.log("Got error: ", err);
         });
       } else if (Platform.OS === 'android' && nextAppState === 'background') {
         Notifications.scheduleNotificationAsync({
@@ -35,7 +37,7 @@ export default function App() {
           },
           trigger: { seconds: 5,},
         }).catch((err) => {
-          console.error("Got error: ", err);
+          console.log("Got error: ", err);
         });
       }
     });
@@ -46,16 +48,19 @@ export default function App() {
         console.log('Notification permissions denied.');
       }
     }).catch((err) => {
-      console.error("Got error: ", err);
+      console.log("Got error: ", err);
     });
   }, []);
 
-  return (
-    <View style={styles.container}>
-      {textEngine.startEngine()}
-    </View>
-  );
+  // return (
+  //   <View style={styles.container}>
+  //     {textEngine.startEngine()}
+  //   </View>
+  // );
+  return <App />
 }
+
+AppRegistry.registerComponent('App', () => ConnectedApp);
 
 export const styles = StyleSheet.create({ //TODO: Make style file
   container: {

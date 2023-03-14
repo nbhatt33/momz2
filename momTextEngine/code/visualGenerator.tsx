@@ -1,6 +1,8 @@
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import * as dialogue from '../dataObjects/dialogue';
 import * as userPrompts from '../dataObjects/userPrompts';
+import { onOptionPress } from './textEngine';
+import { Message } from '../dataObjects/message';
 
 export const displayDialogue = (d: dialogue.Dialogue) => {
     const randomIndex = Math.floor(Math.random() * d.textOptions.length);
@@ -11,7 +13,23 @@ export const displayDialogue = (d: dialogue.Dialogue) => {
     );
 }
 
-export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentDialogue) => { //TODO: make {prompts, next} a type
+export const displayDialogueFromText = (t: string) => {
+    return (
+        <View style = {styles.container}>
+            <Text>{t}</Text>
+        </View> 
+    );
+}
+
+export const displaySentUserPromptsFromText = (t: string) => {
+    return (
+        <View style = {styles.container}>
+            <Text>{t}</Text>
+        </View> 
+    );
+}
+
+export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentDialogue, sentMessages: Message[]) => { //TODO: make {prompts, next} a type
     if (uPsAndNext == null) {
         console.log("No user prompts to display")
         return <Text></Text>;
@@ -27,24 +45,12 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
 
     let htmlButtonArray = [];
     for (let i = 0; i < uPs.length; i++) {
-        const randomIndex = Math.floor(Math.random() * uPs[i].textOptions.length);
+        const randomIndex = Math.floor(Math.random() * uPs[i].textOptions.length); 
         htmlButtonArray.push(
             <Button
                 key={i}
-                onPress={() => {
-                    // console.log("Button pressed: " + uPs[i].textOptions[randomIndex]);
-                    // console.log("Random index: " + randomIndex);
-                    // console.log("uPs[i].nextAction: " + uPs[i].nextAction);
-                    // console.log("nextDialogue[i]: " + nextDialogue[i]);
-                    if (uPs[i].nextAction) {
-                        uPs[i].nextAction.action();
-                    }
-                    if (nextDialogue && nextDialogue[i]) {
-                        // displayDialogue(uPs[i].nextDialogue); TODO: consider efficacy of combining UI and data
-                        setCurrentDialogue(nextDialogue[i]);
-                    }
-                }}
-                title={uPs[i].textOptions[0]}
+                onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentDialogue, sentMessages)}
+                title={uPs[i].textOptions[randomIndex]}
             />
         );
     }
@@ -54,6 +60,12 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
         </View>
     );
 }
+
+// style messages to left of screen
+
+
+// style messages to right of screen
+
 
 const btnGroupStyle = StyleSheet.create({
     btnGroup: {
@@ -76,3 +88,4 @@ export const styles = StyleSheet.create({ //TODO: Make style file
         justifyContent: 'center',
     },
 });
+
