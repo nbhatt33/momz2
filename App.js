@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 // import { StatusBar } from 'expo-status-bar';
 import {StyleSheet, Text, View, AppState, Platform, AppRegistry} from 'react-native';
-import * as textEngine from './momTextEngine/code/textEngine';
 import * as Notifications from 'expo-notifications';
 
 import App from './src/index';
@@ -52,11 +51,6 @@ export default function ConnectedApp() {
     });
   }, []);
 
-  // return (
-  //   <View style={styles.container}>
-  //     {textEngine.startEngine()}
-  //   </View>
-  // );
   return <App />
 }
 

@@ -29,7 +29,7 @@ export const displaySentUserPromptsFromText = (t: string) => {
     );
 }
 
-export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentDialogue, sentMessages: Message[]) => { //TODO: make {prompts, next} a type
+export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt, next?: dialogue.Dialogue}[], setCurrentdialogueAndMessages, sentMessages: Message[]) => { //TODO: make {prompts, next} a type
     if (uPsAndNext == null) {
         console.log("No user prompts to display")
         return <Text></Text>;
@@ -49,7 +49,7 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
         htmlButtonArray.push(
             <Button
                 key={i}
-                onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentDialogue, sentMessages)}
+                onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentdialogueAndMessages, sentMessages)}
                 title={uPs[i].textOptions[randomIndex]}
             />
         );
