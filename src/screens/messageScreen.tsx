@@ -44,16 +44,46 @@ export default function MessageScreen() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={{
+          height: '100%',
+          width: '100%',
+        }}>
             <FlatList
                 data={htmlContent}
-                renderItem={({ item }) => <Text style={styles.firstWelcome}>{item}</Text>}
+                renderItem={({ item, index }) => {
+                  if (index % 2 === 0) {
+                    return (
+                      <View style={{
+                        backgroundColor: 'pink',
+                        width: '100%',
+                        padding: 10,
+                        marginVertical: 3,
+                        borderRadius: 10,
+                      }}>
+                        <Text>{item}</Text>
+                      </View>
+                    )
+                  } else {
+                    return (
+                      <View style={{
+                        backgroundColor: 'lightblue',
+                        alignItems: 'flex-end',
+                        padding: 10,
+                        marginRight: 3,
+                        marginVertical: 3,
+                        borderRadius: 10,
+                      }}>
+                        <Text>{item}</Text>
+                      </View>
+                    )
+                  }
+              }}
             />
-            <SafeAreaView style={styles.userPrompts}>
+            <SafeAreaView>
                 {userPrompts}
             </SafeAreaView>
         
-        </SafeAreaView>
+        </View>
 
     );
 
@@ -138,10 +168,10 @@ export default function MessageScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'pink',
-    flex: 1,
-    height: '100%',
-    width: '100%',
+    // backgroundColor: 'pink',
+    // flex: 1,
+    // height: '100%',
+    // width: '100%',
     
 
   },
@@ -154,24 +184,14 @@ const styles = StyleSheet.create({
   },
   userPrompts: {
     // backgroundColor: 'white',
-    alignItems: 'center',
-    borderColor: 'black',
-    backgroundColor: 'white',
+    // alignItems: 'center',
+    // borderColor: 'black',
+    // backgroundColor: 'white',
   },
   momText: {
     backgroundColor: 'white',
-    alignItems: 'flex-start',
+    // alignItems: 'flex-start',
   },
-  firstWelcome: {
-    height: '100%',
-    width: '50%',
-    // paddingTop: 10,
-    paddingLeft: 10,
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 1,
-    // borderRadius: 50,
-  }
   
   
 });

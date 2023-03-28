@@ -19,17 +19,10 @@ export default function PromptButtom({ title, modeValue, ...rest }) {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 5,
-    // writingDirection: 'rtl',
-    // wordWrap: 'break-word',
-    // fontSize: 10,
-    // width: .7 * width,
+    marginVertical: 5,
+    marginHorizontal: 25,
   },
   buttonContainer: {
-    // flexDirection: 'row',
-    writingDirection: 'rtl',
-    wordWrap: 'break-word',
     fontSize: 10,
-    width: .7 * width,
   },
 });

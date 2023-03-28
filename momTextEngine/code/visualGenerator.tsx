@@ -9,7 +9,7 @@ import PromptButtom from '../../src/components/promptButton';
 export const displayDialogue = (d: dialogue.Dialogue) => {
     const randomIndex = Math.floor(Math.random() * d.textOptions.length);
     return (
-        <View style = {styles.firstWelcome}>
+        <View>
             <Text>{d.textOptions[randomIndex]}</Text>
         </View> 
     );
@@ -17,7 +17,7 @@ export const displayDialogue = (d: dialogue.Dialogue) => {
 
 export const displayDialogueFromText = (t: string) => {
     return (
-        <View style = {styles.firstWelcome}>
+        <View>
             <Text>{t}</Text>
         </View> 
     );
@@ -25,8 +25,8 @@ export const displayDialogueFromText = (t: string) => {
 
 export const displaySentUserPromptsFromText = (t: string) => {
     return (
-        <View style = {styles.firstWelcome}>
-            <Text style={styles.firstWelcome}>{t}</Text>
+        <View>
+            <Text>{t}</Text>
         </View> 
     );
 }
@@ -74,25 +74,6 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
 
 
 export const styles = StyleSheet.create({ //TODO: Make style file
-    // container: {
-    //     flex: 1,
-    //     backgroundColor: 'green',
-    //     // alignItems: 'center',
-    //     // justifyContent: 'center',
-    //     // margin: 10,
-    //     padding: 10,
 
-
-    // },
-
-    firstWelcome: {
-        flex: 1,
-        backgroundColor: 'green',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // margin: 10,
-        padding: 10,
-    },
-    
 });
 
