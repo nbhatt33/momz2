@@ -50,3 +50,8 @@ export const no: UserPrompt = {
 export const plainNo: UserPrompt = {
     textOptions: ["No"],
 }
+
+export const seeTime: UserPrompt = {
+    textOptions: ["What's the time?"],
+    nextAction: action.getTime
+}

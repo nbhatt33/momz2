@@ -43,7 +43,7 @@ export default function Navigator() {
   return (
     <Stack.Navigator>
       {user.user ? (
-        <Stack.Screen name="Home" component={HomeStack} />
+        <Stack.Screen name="M.O.M." component={HomeStack} />
       ) : (
         <Stack.Screen name="Auth" component={AuthStack} />
       )}

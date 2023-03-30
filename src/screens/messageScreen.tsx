@@ -1,8 +1,5 @@
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { Button, FlatList, StyleSheet, TextInput, View, Text, SafeAreaView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { auth, db } from '../../firebaseConfig';
+import React, { useState } from 'react';
+import { FlatList, View, Text, SafeAreaView } from 'react-native';
 
 import { Message } from '../../momTextEngine/dataObjects/message';
 import * as dialogue from '../../momTextEngine/dataObjects/dialogue';
@@ -12,8 +9,6 @@ interface DialogueAndMessages {
     readonly currdialogue: dialogue.Dialogue;
     readonly  sentMessages: Message[];
 }
-
-
 
 export default function MessageScreen() {
     //const initalDialogue: dialogue.Dialogue = dialogue.firstWelcome;
@@ -34,7 +29,6 @@ export default function MessageScreen() {
     });
     //Display options to user (if any)
     const currentdialogue = currentdialogueAndMessages.currdialogue;
-    console.log("currentDialogue:", currentdialogue);
 
     let userPrompts;
     if (currentdialogue && currentdialogue.promptsAndNext) {
@@ -82,37 +76,6 @@ export default function MessageScreen() {
             <SafeAreaView>
                 {userPrompts}
             </SafeAreaView>
-        
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: 'pink',
-    // flex: 1,
-    // height: '100%',
-    // width: '100%',
-    
-
-  },
-  item: {
-    // alignContent: 'center',
-    // justifyContent: 'center',
-    // textAlign: 'center',
-    fontSize: 32,
-    backgroundColor: 'white',
-  },
-  userPrompts: {
-    // backgroundColor: 'white',
-    // alignItems: 'center',
-    // borderColor: 'black',
-    // backgroundColor: 'white',
-  },
-  momText: {
-    backgroundColor: 'white',
-    // alignItems: 'flex-start',
-  },
-  
-  
-});

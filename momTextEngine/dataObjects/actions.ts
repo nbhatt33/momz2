@@ -1,4 +1,5 @@
 import { eventTags } from "./eventTags";
+import { Alert } from 'react-native'
 
 export interface Action {
     readonly action: () => void; //TODO: Add proper parameters
@@ -24,3 +25,10 @@ export const tags: Action[] = eventTags.map((tag) => {
         }
     }
 });
+
+export const getTime: Action = {
+    action: () => {
+        let date = new Date();
+        Alert.alert("Current time/date " + date.toDateString())
+    }
+}

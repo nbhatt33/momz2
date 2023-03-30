@@ -5,7 +5,6 @@ import { onOptionPress } from './textEngine';
 import { Message } from '../dataObjects/message';
 import PromptButtom from '../../src/components/promptButton';
 
-
 export const displayDialogue = (d: dialogue.Dialogue) => {
     const randomIndex = Math.floor(Math.random() * d.textOptions.length);
     return (
@@ -49,12 +48,6 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
     for (let i = 0; i < uPs.length; i++) {
         const randomIndex = Math.floor(Math.random() * uPs[i].textOptions.length); 
         htmlButtonArray.push(
-            // <Button 
-            //     key={i}
-            //     onPress={onOptionPress(uPs, i, randomIndex, nextDialogue, setCurrentDialogue, sentMessages)}
-                
-            //     title={uPs[i].textOptions[randomIndex]}
-            // />
             <PromptButtom 
                 key={i}
                 modeValue="contained" 
@@ -69,11 +62,3 @@ export const displayUserPrompts = (uPsAndNext: {prompts: userPrompts.UserPrompt,
         </View>
     );
 }
-
-
-
-
-export const styles = StyleSheet.create({ //TODO: Make style file
-
-});
-
