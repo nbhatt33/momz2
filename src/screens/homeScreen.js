@@ -19,6 +19,11 @@ export default function HomeScreen({ navigation }) {
           title="Send a message to mom"
           onPress={() => navigation.navigate('Message')}
         />
+        <FormButton
+          modeValue="contained"
+          title="View Calendar"
+          onPress={() => navigation.navigate('Calendar')}
+        />
         <FormButton 
           modeValue="contained" 
           title="Logout" 
