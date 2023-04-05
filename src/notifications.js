@@ -18,7 +18,7 @@ export const pushNotificationsAsync = async () => {
           Notifications.scheduleNotificationAsync({
             content: {
               title: 'You left the app!',
-              body: 'Come back and talk to mom!',
+              body: 'Come back soon!',
             },
             trigger: { seconds: 5,},
             
@@ -29,7 +29,7 @@ export const pushNotificationsAsync = async () => {
           Notifications.scheduleNotificationAsync({
             content: {
               title: 'You left the app!',
-              body: 'Come back and talk to mom!',
+              body: 'Come back soon!',
             },
             trigger: { seconds: 5,},
           }).catch((err) => {
