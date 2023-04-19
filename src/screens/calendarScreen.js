@@ -45,20 +45,19 @@ export default () => {
     APPOINTMENTS[APPOINTMENTS.length - 1].title = enteredGoalText
   }
   var selectedDate
-  const baseDate = '2023-04-18'
-  console.log(new Date().toLocaleDateString());
   var test = new Date().toLocaleDateString();
-  //test = test.replace(/'\\"'/g, '-');
   test = test.substring(0,4) + '-' + test.substring(5);
   test = test.substring(0,1) + '-' + test.substring(2);
-  console.log(test);
+  test = test.substring(5) + '-0' + test.substring(0,2) + test.substring(2,4)
+  const baseDate = test
+  console.log(baseDate)
   const APPOINTMENTS = [
     {
       date: '2023-04-01',
       title: "It's a past thing!",
     },
     {
-      date: '2023-04-18',
+      date: baseDate,
       title: "It's a today thing!",
     },
     {
