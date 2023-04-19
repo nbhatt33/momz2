@@ -45,18 +45,24 @@ export default () => {
     APPOINTMENTS[APPOINTMENTS.length - 1].title = enteredGoalText
   }
   var selectedDate
-  const baseDate = '2023-03-30'
+  const baseDate = '2023-04-18'
+  console.log(new Date().toLocaleDateString());
+  var test = new Date().toLocaleDateString();
+  //test = test.replace(/'\\"'/g, '-');
+  test = test.substring(0,4) + '-' + test.substring(5);
+  test = test.substring(0,1) + '-' + test.substring(2);
+  console.log(test);
   const APPOINTMENTS = [
     {
-      date: '2023-03-13',
+      date: '2023-04-01',
       title: "It's a past thing!",
     },
     {
-      date: '2023-03-22',
+      date: '2023-04-18',
       title: "It's a today thing!",
     },
     {
-      date: '2023-04-15',
+      date: '2023-04-30',
       title: "It's a future thing!",
     },
     {
@@ -98,11 +104,11 @@ export default () => {
           selectedDayTextColor: '#166088',
           selectedDotColor: '#166088',
 
-          dayTextColor: '#DBE9EE',
+          dayTextColor: '#729DAF',
           textDisabledColor: '#729DAF',
           dotColor: '#DBE9EE',
 
-          monthTextColor: '#DBE9EE',
+          monthTextColor: '#729DAF',
           textMonthFontWeight: 'bold',
 
           arrowColor: '#DBE9EE',
