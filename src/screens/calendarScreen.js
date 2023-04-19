@@ -3,7 +3,7 @@ import { Alert, StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dateFns from 'date-fns';
 import * as Notifications from 'expo-notifications';
-import {pushCalendarNotificationsAsync} from '../notifications'
+import {pushCalendarNotificationsAsync, pushReminderNotificationsAsync} from '../notifications'
 import { useState } from 'react';
 import FormButton from '../components/formButton';
 import FormInput from '../components/formInput';
@@ -43,15 +43,22 @@ export default () => {
   function addEventHandler() {
     APPOINTMENTS[APPOINTMENTS.length - 1].date = selectedDate
     APPOINTMENTS[APPOINTMENTS.length - 1].title = enteredGoalText
+
+    //Reminder Notifications
+    console.log(selectedDate)
+
+    x = 2
+    pushReminderNotificationsAsync(x, selectedDate, enteredGoalText)
+
   }
   var selectedDate
   const baseDate = '2023-04-18'
-  console.log(new Date().toLocaleDateString());
+  // console.log(new Date().toLocaleDateString());
   var test = new Date().toLocaleDateString();
   //test = test.replace(/'\\"'/g, '-');
   test = test.substring(0,4) + '-' + test.substring(5);
   test = test.substring(0,1) + '-' + test.substring(2);
-  console.log(test);
+  // console.log(test);
   const APPOINTMENTS = [
     {
       date: '2023-04-01',
