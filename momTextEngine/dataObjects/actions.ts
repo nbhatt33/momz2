@@ -1,5 +1,6 @@
 import { eventTags } from "./eventTags";
-import { Alert } from 'react-native'
+import { Alert } from 'react-native';
+import { APPOINTMENTS } from "../../src/screens/calendarScreen";
 
 export interface Action {
     readonly action: () => void; //TODO: Add proper parameters
@@ -22,6 +23,9 @@ export const tags: Action[] = eventTags.map((tag) => {
     return {
         action: () => {
             console.log("Tagging " + tag.name);
+            APPOINTMENTS[APPOINTMENTS.length - 1].date = "2023-04-19"
+            APPOINTMENTS[APPOINTMENTS.length - 1].title = "Added through chat"
+            APPOINTMENTS[APPOINTMENTS.length - 1].type = tag.name
         }
     }
 });
