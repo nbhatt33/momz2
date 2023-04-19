@@ -8,8 +8,17 @@ import { useState } from 'react';
 import FormButton from '../components/formButton';
 import FormInput from '../components/formInput';
 import PromptButton from '../components/promptButton';
+//import { Dropdown } from 'react-native-material-dropdown';
+import Dropdown from 'react-dropdown';
 
 const format = (date = new Date()) => dateFns.format(date, 'YYYY-MM-DD');
+const appointmentTypes = [
+  {value: 'Default'},
+  {value: 'Course'},
+  {value: 'Assignment'},
+  {value: 'Exam'},
+  {value: 'Work'}
+];
 const getMarkedDates = (baseDate, appointments) => {
   const markedDates = {};
 
@@ -33,42 +42,53 @@ const getMarkedDates = (baseDate, appointments) => {
   return markedDates;
 };
 
+var test = new Date().toLocaleDateString();
+  test = test.substring(0,4) + '-' + test.substring(5);
+  test = test.substring(0,1) + '-' + test.substring(2);
+  test = test.substring(5) + '-0' + test.substring(0,2) + test.substring(2,4)
+  const baseDate = test
+
+export const APPOINTMENTS = [
+  {
+    date: '2023-04-01',
+    title: "It's a past thing!",
+    type: "Default"
+  },
+  {
+    date: baseDate,
+    title: "It's a today thing!",
+    type: "Work"
+  },
+  {
+    date: '2023-04-30',
+    title: "It's a future thing!",
+    type: "Assignment"
+  },
+  {
+    date: '2024-03-25',
+    title: "CS 2200 Exam",
+    type: "Course"
+  }
+];
 export default () => {
   const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [enteredTypeText, setEnteredTypeText] = useState('');
 
   function goalInputHandler(textEntered) {
     setEnteredGoalText(textEntered)
+  }
+  function typeInputHandler(textEntered) {
+    setEnteredTypeText(textEntered)
   }
 
   function addEventHandler() {
     APPOINTMENTS[APPOINTMENTS.length - 1].date = selectedDate
     APPOINTMENTS[APPOINTMENTS.length - 1].title = enteredGoalText
+    APPOINTMENTS[APPOINTMENTS.length - 1].type = enteredTypeText
   }
   var selectedDate
-  var test = new Date().toLocaleDateString();
-  test = test.substring(0,4) + '-' + test.substring(5);
-  test = test.substring(0,1) + '-' + test.substring(2);
-  test = test.substring(5) + '-0' + test.substring(0,2) + test.substring(2,4)
-  const baseDate = test
-  console.log(baseDate)
-  const APPOINTMENTS = [
-    {
-      date: '2023-04-01',
-      title: "It's a past thing!",
-    },
-    {
-      date: baseDate,
-      title: "It's a today thing!",
-    },
-    {
-      date: '2023-04-30',
-      title: "It's a future thing!",
-    },
-    {
-      date: '2024-03-25',
-      title: "CS 2200 Exam",
-    }
-  ];
+  
+  
   /*
   function day() {
     var i = 0;
@@ -81,6 +101,10 @@ export default () => {
     }
   }  
   */
+  const options = [
+    'one', 'two', 'three'
+  ];
+  const defaultOption = options[0];
   return (
     <View style={styles.container}>
       <Calendar
@@ -90,7 +114,11 @@ export default () => {
           var i = 0;
           while(i < APPOINTMENTS.length) {
             if (day.dateString === APPOINTMENTS[i].date){
-              console.log(APPOINTMENTS[i].title)
+              //alert("Your notes for " + APPOINTMENTS[i].date + ": " + APPOINTMENTS[i].title);
+              Alert.alert(
+                "Your notes for " + APPOINTMENTS[i].date + ": ",
+                "Type: " + APPOINTMENTS[i].type + " Event: " + APPOINTMENTS[i].title,
+              );
             }
             i++
           }
@@ -118,6 +146,13 @@ export default () => {
         labelName = 'Event'
         onChangeText = {goalInputHandler}
         value = {enteredGoalText}>
+      </FormInput>
+      
+      <FormInput 
+        // style = {styles.input}
+        labelName = 'Event Type'
+        onChangeText = {typeInputHandler}
+        value = {enteredTypeText}>
       </FormInput>
 
       <PromptButton
