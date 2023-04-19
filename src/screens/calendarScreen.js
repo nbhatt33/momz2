@@ -3,7 +3,7 @@ import { Alert, StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import dateFns from 'date-fns';
 import * as Notifications from 'expo-notifications';
-import {pushCalendarNotificationsAsync} from '../notifications'
+import {pushCalendarNotificationsAsync, pushReminderNotificationsAsync} from '../notifications'
 import { useState } from 'react';
 import FormButton from '../components/formButton';
 import FormInput from '../components/formInput';
