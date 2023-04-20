@@ -23,13 +23,14 @@ export const tags: Action[] = eventTags.map((tag) => {
     return {
         action: () => {
             console.log("Tagging " + tag.name);
+            let chosen = prompt(`Please enter the year of your ${tag.name} in yyyy-mm-dd`, APPOINTMENTS[APPOINTMENTS.length-1].date);
+            alert(`Added ${tag.name} to date: ${chosen}`); // Confirmation
             var appointment = {
                 date: "2023-04-19",
                 title: "Added through chat",
                 type: tag.name
               }
               APPOINTMENTS[APPOINTMENTS.length] = appointment
-              {calendarScreen}
         }
     }
 });
