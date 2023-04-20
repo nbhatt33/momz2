@@ -82,9 +82,12 @@ export default () => {
   }
 
   function addEventHandler() {
-    APPOINTMENTS[APPOINTMENTS.length - 1].date = selectedDate
-    APPOINTMENTS[APPOINTMENTS.length - 1].title = enteredGoalText
-    APPOINTMENTS[APPOINTMENTS.length - 1].type = enteredTypeText
+    var appointment = {
+      date: selectedDate,
+      title: enteredGoalText,
+      type: enteredTypeText
+    }
+    APPOINTMENTS[APPOINTMENTS.length] = appointment
   }
   var selectedDate
   
@@ -119,6 +122,7 @@ export default () => {
                 "Your notes for " + APPOINTMENTS[i].date + ": ",
                 "Type: " + APPOINTMENTS[i].type + " Event: " + APPOINTMENTS[i].title,
               );
+              console.log(APPOINTMENTS)
             }
             i++
           }

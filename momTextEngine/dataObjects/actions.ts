@@ -1,6 +1,6 @@
 import { eventTags } from "./eventTags";
-import { Alert } from 'react-native';
-import { APPOINTMENTS } from "../../src/screens/calendarScreen";
+import { Alert, StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import calendarScreen, { APPOINTMENTS } from "../../src/screens/calendarScreen";
 
 export interface Action {
     readonly action: () => void; //TODO: Add proper parameters
@@ -23,12 +23,17 @@ export const tags: Action[] = eventTags.map((tag) => {
     return {
         action: () => {
             console.log("Tagging " + tag.name);
-            APPOINTMENTS[APPOINTMENTS.length - 1].date = "2023-04-19"
-            APPOINTMENTS[APPOINTMENTS.length - 1].title = "Added through chat"
-            APPOINTMENTS[APPOINTMENTS.length - 1].type = tag.name
+            var appointment = {
+                date: "2023-04-19",
+                title: "Added through chat",
+                type: tag.name
+              }
+              APPOINTMENTS[APPOINTMENTS.length] = appointment
+              {calendarScreen}
         }
     }
 });
+
 
 export const getTime: Action = {
     action: () => {
@@ -36,3 +41,4 @@ export const getTime: Action = {
         Alert.alert("Current time/date " + date.toDateString())
     }
 }
+
