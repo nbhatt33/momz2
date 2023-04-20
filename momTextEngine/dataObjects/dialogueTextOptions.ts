@@ -74,3 +74,7 @@ export const eatingWellQuestion: string[] = [
 export const timeQuestion: string[] = [
     "Would you like to know the date/time?"
 ];
+
+export const otherEventOptionQuestion: string[] = [
+    "Would you like to add another event tag?"
+];
