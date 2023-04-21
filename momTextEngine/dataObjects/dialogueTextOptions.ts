@@ -1,7 +1,20 @@
-export const brushTeeth: string[] = [
-    "Alright, don't forget to brush your teeth!",
+export const closer: string[] = [
     "Okay, be sure to clean those pearly whites!",
-    "Take care now! Before bed, don't forget to brush your teeth!"
+    "Take care now! Before bed, don't forget to brush your teeth!",
+    "Great to hear from you! Remember to touch some grass today!",
+    "Don't forget to turn off the oven before you head out!",
+    "Have a great day! Don't forget to take your meds!",
+    "Okay, I'll be here if you need me!",
+    "Make sure to take a shower before you head out!",
+    "What a great day to be alive!",
+    "Keep on taking those steps towards your goals!",
+    "I'm so proud of you!",
+    "You're doing great!",
+    "Have a great day!",
+    "I'm here for you!",
+    "I'm always here for you!",
+    "Take care now!",
+    "Talk to you later!",
 ];
 
 export const changeTag: string[] =  [
