@@ -8,8 +8,6 @@ import * as visualGenerator from '../../momTextEngine/code/visualGenerator';
 import { withDecay } from 'react-native-reanimated';
 import { TextInput } from 'react-native-gesture-handler';
 
-// import * as actions from '../../momTextEngine/dataObjects/actions';
-
 interface DialogueAndMessages {
     readonly currdialogue: dialogue.Dialogue;
     readonly  sentMessages: Message[];
@@ -18,7 +16,6 @@ interface DialogueAndMessages {
 
 
 export default function MessageScreen() {
-    //const initalDialogue: dialogue.Dialogue = dialogue.firstWelcome;
     let randomIndex = Math.floor(Math.random() * dialogue.beginConvo.length);
     const initalDialogue: dialogue.Dialogue = dialogue.beginConvo[randomIndex];
     randomIndex = Math.floor(Math.random() * initalDialogue.textOptions.length);
@@ -29,7 +26,6 @@ export default function MessageScreen() {
     const [modalVisible, setModalVisible] = useState(true);
 
     const [eventTag, setEventTag] = useState('');
-
 
     //Display the messages
     let htmlContent = sentMessages.map((message, i) => {
@@ -114,13 +110,8 @@ export default function MessageScreen() {
                                   const min = 1;
                                   const max = 100000000;
                                   const rand = min + Math.random() * (max - min);
-                                  console.log('rand: ' + rand)
                                   const strRand = rand.toString();
-                                  console.log('strRand: ' + strRand)
-                                  // fetch('curl -X "PUT" -H "Content-Type: application/json" -d "{\"id\": \"' + strRand + '\"}"');
-                                  const curl = 'curl -X "PUT" -H "Content-Type: application/json" -d "{\"id\": \"' + strRand + '\", \"tag\": \"'+ eventTag+ '\"}" https://9rd8efs79f.execute-api.us-east-2.amazonaws.com/items';
-                                  console.log('curl: ' + curl);
-                                  // fetch(curl);
+
                                   fetch('https://9rd8efs79f.execute-api.us-east-2.amazonaws.com/items', {
                                     method: 'PUT',
                                     headers: {
@@ -132,8 +123,6 @@ export default function MessageScreen() {
                                       tag: eventTag,
                                     }),
                                   });
-
-                                  // fetch('curl -X "PUT" -H "Content-Type: application/json" -d "{\"id\": \"' + strRand + '\", \"tag\": \"'+ eventTag+ '\"}" https://9rd8efs79f.execute-api.us-east-2.amazonaws.com/items')
                               }}
                           >
                               <Text style={styles.textStyle}>Submit</Text>
