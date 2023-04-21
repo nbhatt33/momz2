@@ -34,9 +34,9 @@ const getMarkedDates = (baseDate, appointments) => {
 
     const curr_date = new Date()
 
-    if (curr_date.toISOString().substring(0,10) == appointment.date.substring(0,10)){
-      pushCalendarNotificationsAsync(appointment)
-    }
+    // if (curr_date.toISOString().substring(0,10) == appointment.date.substring(0,10)){
+    //   pushCalendarNotificationsAsync(appointment)
+    // }
     
   });
 
@@ -69,6 +69,11 @@ export const APPOINTMENTS = [
     date: '2024-03-25',
     title: "CS 2200 Exam",
     type: "Course"
+  },
+  {
+    date: '2024-04-21',
+    title: "CS 4510 Exam",
+    type: "Exam"
   }
 ];
 export var selectedDate = baseDate;
@@ -90,6 +95,10 @@ export default () => {
       type: enteredTypeText
     }
     APPOINTMENTS[APPOINTMENTS.length] = appointment
+    pushReminderNotificationsAsync(enteredTypeText, selectedDate, enteredGoalText)
+    pushCalendarNotificationsAsync(appointment)
+ 
+    
   }
   
   
@@ -131,54 +140,118 @@ export default () => {
         }}
         markedDates={getMarkedDates(baseDate, APPOINTMENTS)}
         theme={{
-          calendarBackground: '#f5f5f5',
+          calendarBackground: '#f2f2f2' ,
 
-          selectedDayBackgroundColor: '#C0D6DF',
-          selectedDayTextColor: '#166088',
-          selectedDotColor: '#166088',
 
-          dayTextColor: '#729DAF',
-          textDisabledColor: '#729DAF',
-          dotColor: '#DBE9EE',
-
-          monthTextColor: '#729DAF',
+          selectedDayBackgroundColor: '#6750a4',
+          selectedDayTextColor: 'white',
+          selectedDotColor: 'purple',
+ 
+ 
+          dayTextColor: '#6750a4',
+          textDisabledColor: '#b99de0',
+          dotColor: 'purple',
+ 
+ 
+          monthTextColor: '#6750a4',
           textMonthFontWeight: 'bold',
-
-          arrowColor: '#DBE9EE',
+ 
+ 
+          arrowColor: '#e4e0e3',
         }}
+ 
       />
-      <FormInput 
-        // style = {styles.input}
-        labelName = 'Event'
-        onChangeText = {goalInputHandler}
-        value = {enteredGoalText}>
-      </FormInput>
-      
-      <FormInput 
-        // style = {styles.input}
-        labelName = 'Event Type'
-        onChangeText = {typeInputHandler}
-        value = {enteredTypeText}>
-      </FormInput>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style = {styles.eventTextInput}
+            placeholder = 'Your Event Name'
+            placeholderTextColor={'lightgray'}
+            onChangeText = {goalInputHandler}
+            value = {enteredGoalText}>
+          </TextInput>
 
-      <PromptButton
-        // color='#578580'
-        title = "Add Event"
-        onPress={addEventHandler}
-      ></PromptButton>
-    </View>
-  );
+          <TextInput
+          style = {styles.typeTextInput}
+          labelName = 'Event Type'
+          placeholder = 'Event Type'
+          placeholderTextColor={'lightgray'}
+          onChangeText = {typeInputHandler}
+          value = {enteredTypeText}>
+          </TextInput>
+        </View>
+        
+       
+        <View style={styles.buttonContainer}>
+       
+          <FormButton
+            modeValue="contained" 
+            title = "Add Event"
+            onPress={addEventHandler}
+          />
+
+        </View>
+      
+     {}
+   </View>
+ );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#166088',
-    justifyContent: 'center',
-  },
-  input: {
-    alignItems: 'center'
-  },
-});
 
+const styles = StyleSheet.create({
+ container: {
+   flex: 1,
+   // backgroundColor: '#166088',
+   justifyContent: 'flex-start' ,
+ },
+ inputContainer: {
+   flex:1,
+   flexDirection: 'row',
+   justifyContent: 'center',
+   alignItems: 'flex-start',
+   marginTop: 17,
+   marginBottom: 24,
+   borderBottomWidth: 1,
+   borderBottomColor: '#f5f5f5',
+   marginRight: 5
+   
+ },
+  eventTextInput: {
+   borderWidth: 1,
+   borderColor: '#6750a4',
+   borderRadius: 10,
+   width:'60%',
+   marginRight: 10,
+   marginLeft: 20,
+   padding: 8
+ },
+  typeTextInput: {
+    borderWidth: 1,
+    borderColor: '#6750a4',
+    borderRadius: 10,
+    width:'30%',
+    marginRight: 20,
+    marginLeft: 5,
+    padding: 8
+},
+ button: {
+   marginRight: 5,
+   justifyContent: 'center',
+   alignItems: 'flex-start',
+ },
+ buttonContainer: {
+   flex:4,
+   top: 0,
+
+   flexDirection: 'row',
+   justifyContent: 'center',
+   alignItems: 'flex-start',
+   marginTop: 0,
+   marginBottom: 50,
+   borderBottomWidth: 1,
+   borderBottomColor: '#f5f5f5',
+   marginRight: 5,
+   padding: 50,
+
+ }
+});
 
