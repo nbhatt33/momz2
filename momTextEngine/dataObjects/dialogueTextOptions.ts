@@ -1,3 +1,4 @@
+
 export const brushTeeth: string[] = [
     "Alright, don't forget to brush your teeth!",
     "Okay, be sure to clean those pearly whites!",
@@ -5,8 +6,8 @@ export const brushTeeth: string[] = [
 ];
 
 export const changeTag: string[] =  [
-    "What would you like to tag this task with?",
-    "What tag would you like to add to this task?"
+    `What would you like to tag this task with?`,
+    `What tag would you like to add to this task?`
 ];
 
 export const responseFeelingGood: string[] = [
@@ -15,12 +16,12 @@ export const responseFeelingGood: string[] = [
 ];
 
 export const responseFeelingNotGood: string[] = [
-    "I'm sorry to hear that. I'm here to help you manage your tasks and events. What would you like to do today?",
+    `I'm sorry to hear that. I'm here to help you manage your ${"\n"} tasks and events. What would you like to do today?`,
     "I'm sorry to hear that. What can I help you with?"
 ];
 
 export const firstWelcome: string[] = [
-    "Hey there! I'm M.O.M (My Online Mother), and I'm here to help you manage your tasks and events. How are you doing today?",
+    `Hey there! I'm M.O.M (My Online Mother), and I'm here to help ${"\n"} you manage your tasks and events. How are you doing today?`,
     "Hi! I'm M.O.M (My Online Mother), and I'm here to help you manage your tasks and events. How are you feeling?"
 ];
 
@@ -31,10 +32,10 @@ export const beenTooLong: string[] = [
 ];
 
 export const wantToChatYes: string[] = [
-    "I am here to help however I can. I am here to listen to you, and I am here to help you manage your tasks and events. What would you like to do today?",
-    "I wish we could chat more in depth, but for now, I am here to help you manage your tasks and events. Can I help you with anything?",
-    "Even though I can't talk to you in depth, I am here to help you manage your tasks and events. Let's try to get you feeling better by getting atop of your responsibilities.",
-    "If you ever need more support than even I can provide, please reach out to a friend or professional. I am here to help you manage your tasks and events. How about we get into that now?"
+    `I am here to help however I can. I am here to listen to you, and I ${"\n"} am here to help you manage your tasks and events. What would you like to do today?`,
+    `I wish we could chat more in depth, but for now, I am here to help you ${"\n"} manage your tasks and events. Can I help you with anything?`,
+   ` Even though I can't talk to you in depth, I am here to help you manage ${"\n"}your tasks and events. Let's try to get you feeling better by getting atop of your responsibilities.`,
+    `If you ever need more support than even I can provide, please reach out ${"\n"} to a friend or professional. I am here to help you manage your tasks and events. How about we get into that now?`
 ];
 
 export const wantToChatNo: string[] = [
@@ -58,7 +59,7 @@ export const eatingWellYes: string[] = [
 ];
 
 export const eatingWellNo: string[] =  [
-    "I'm sorry to hear that. After we take charge of your responsibilities, be sure to check out some healthy recipes online! I know you're always so good with that techy stuff.",
+    `I'm sorry to hear that. After we take charge of your responsibilities, be ${"\n"}sure to check out some healthy recipes online! I know you're always so good with that techy stuff.`,
     "I'm sorry to hear that. What can I help you with?",
     "Don't worry, we'll get you back on track. After we take care of your responsibilities, be sure to check out some healthy recipes online!",
     "Staying well fed is important to keep that big brain of yours working. Let's handle your tasks so you can onto other things!"

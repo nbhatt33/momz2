@@ -10,6 +10,7 @@ import FormInput from '../components/formInput';
 import PromptButton from '../components/promptButton';
 //import { Dropdown } from 'react-native-material-dropdown';
 import Dropdown from 'react-dropdown';
+import Dialog from "react-native-dialog";
 
 const format = (date = new Date()) => dateFns.format(date, 'YYYY-MM-DD');
 const appointmentTypes = [
@@ -70,6 +71,7 @@ export const APPOINTMENTS = [
     type: "Course"
   }
 ];
+export var selectedDate = baseDate;
 export default () => {
   const [enteredGoalText, setEnteredGoalText] = useState('');
   const [enteredTypeText, setEnteredTypeText] = useState('');
@@ -89,7 +91,7 @@ export default () => {
     }
     APPOINTMENTS[APPOINTMENTS.length] = appointment
   }
-  var selectedDate
+  
   
   
   /*
@@ -178,3 +180,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
+
+
