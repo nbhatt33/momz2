@@ -88,33 +88,40 @@ export const pushNotificationsAsync = async () => {
 
 
 export const pushReminderNotificationsAsync = async (type, selectedDate, text) => {
+
   let event_days = assign_days(type)
   let day_string = ''
- if (event_days == 1) {
-   day_string = 'day!'
- }else {
-   day_string = 'days!'
- }
+  if (event_days == 1) {
+    day_string = 'day!'
+  }else {
+    day_string = 'days!'
+  }
  // console.log("w", event_days, day_string, type)
 
 
  // console.log("reminder")
  // console.log(Date.now())
- const targetDate = new Date(selectedDate); // Replace with your target date
- targetDate.setHours(10); // 10 AM
- targetDate.setMinutes(0); // 00 minutes
- targetDate.setSeconds(0); // 0 seconds
+  const targetDate = new Date(selectedDate); // Replace with your target date
+  targetDate.setHours(10); // 10 AM
+  targetDate.setMinutes(0); // 00 minutes
+  targetDate.setSeconds(0); // 0 seconds
 
 
- const reminderDate = new Date(targetDate)
- reminderDate.setDate(targetDate.getDate() - event_days + 1);
- // console.log(reminderDate)
+  const reminderDate = new Date(targetDate)
+  reminderDate.setDate(targetDate.getDate() - event_days + 1);
+  // console.log(reminderDate)
+
+  const currentDate = new Date();
+  if (reminderDate < currentDate) {
+    console.log("past")
+    return
+  }
 
 
- sec = Date.now() - reminderDate.getTime()
- // console.log("seconds", sec)
- s = Math.abs(Number(sec/1000))
- console.log("reminder", s, reminderDate)
+  sec = Date.now() - reminderDate.getTime()
+  // console.log("seconds", sec)
+  s = Math.abs(Number(sec/1000))
+  console.log("reminder", s, reminderDate)
 
 
 
@@ -164,11 +171,20 @@ export const pushReminderNotificationsAsync = async (type, selectedDate, text) =
 }
 
 export const pushCalendarNotificationsAsync = async (appointment) => {
+
+  
+
   const targetDate = new Date(appointment.date); // Replace with your target date
   targetDate.setHours(9); // 10 AM
   targetDate.setMinutes(0); // 00 minutes
   targetDate.setSeconds(0); // 0 seconds
   targetDate.setDate(targetDate.getDate() + 1);
+
+  const currentDate = new Date();
+  if ( targetDate < currentDate) {
+    console.log("past")
+    return
+  }
 
 
   console.log(targetDate)

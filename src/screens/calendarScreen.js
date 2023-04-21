@@ -95,7 +95,9 @@ export default () => {
       type: enteredTypeText
     }
     APPOINTMENTS[APPOINTMENTS.length] = appointment
+    
     pushReminderNotificationsAsync(enteredTypeText, selectedDate, enteredGoalText)
+    console.log("push from calendar")
     pushCalendarNotificationsAsync(appointment)
  
     
