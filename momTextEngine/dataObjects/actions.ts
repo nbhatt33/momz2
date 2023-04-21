@@ -6,6 +6,7 @@ import Dialog from "react-native-dialog";
 import { Modal } from "react-native/Libraries/Modal/Modal";
 import React from "react";
 import { RefreshControl } from "react-native-gesture-handler";
+import { pushCalendarNotificationsAsync, pushReminderNotificationsAsync } from "../../src/notifications";
 
 export interface Action {
     readonly action: () => void; //TODO: Add proper parameters
@@ -54,10 +55,12 @@ export const tags: Action[] = eventTags.map((tag) => {
                 
                 var appointment = {
                     date: selectedDate,
-                    title: "Added through chat",
+                    title: "Event added through chat",
                     type: tag.name
                   }
                   APPOINTMENTS[APPOINTMENTS.length] = appointment
+                  pushCalendarNotificationsAsync(appointment)
+                  pushReminderNotificationsAsync(tag.name, selectedDate, "Event added through chat")
             }
         }    
 });
