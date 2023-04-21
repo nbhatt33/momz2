@@ -6,11 +6,7 @@ import * as Notifications from 'expo-notifications';
 import {pushCalendarNotificationsAsync, pushReminderNotificationsAsync} from '../notifications'
 import { useState } from 'react';
 import FormButton from '../components/formButton';
-import FormInput from '../components/formInput';
-import PromptButton from '../components/promptButton';
-//import { Dropdown } from 'react-native-material-dropdown';
-import Dropdown from 'react-dropdown';
-import Dialog from "react-native-dialog";
+import { Platform } from "react-native";
 
 const format = (date = new Date()) => dateFns.format(date, 'YYYY-MM-DD');
 const appointmentTypes = [
@@ -121,8 +117,9 @@ export default () => {
     'one', 'two', 'three'
   ];
   const defaultOption = options[0];
+  if (Platform.OS === 'ios') {
   return (
-    <View style={styles.container}>
+    <View style={IOSstyles.container}>
       <Calendar
         current={baseDate} 
         onDayPress={(day) => {
@@ -163,9 +160,9 @@ export default () => {
         }}
  
       />
-        <View style={styles.inputContainer}>
+        <View style={IOSstyles.inputContainer}>
           <TextInput
-            style = {styles.eventTextInput}
+            style = {IOSstyles.eventTextInput}
             placeholder = 'Your Event Name'
             placeholderTextColor={'lightgray'}
             onChangeText = {goalInputHandler}
@@ -173,7 +170,7 @@ export default () => {
           </TextInput>
 
           <TextInput
-          style = {styles.typeTextInput}
+          style = {IOSstyles.typeTextInput}
           labelName = 'Event Type'
           placeholder = 'Event Type'
           placeholderTextColor={'lightgray'}
@@ -183,7 +180,82 @@ export default () => {
         </View>
         
        
-        <View style={styles.buttonContainer}>
+        <View style={IOSstyles.buttonContainer}>
+       
+          <FormButton
+            modeValue="contained" 
+            title = "Add Event"
+            onPress={addEventHandler}
+          />
+
+        </View>
+      
+     {}
+   </View>
+ );} else {
+  return (
+    <View style={Droidstyles.container}>
+      <Calendar
+        current={baseDate} 
+        onDayPress={(day) => {
+          selectedDate = day.dateString
+          var i = 0;
+          while(i < APPOINTMENTS.length) {
+            if (day.dateString === APPOINTMENTS[i].date){
+              //alert("Your notes for " + APPOINTMENTS[i].date + ": " + APPOINTMENTS[i].title);
+              Alert.alert(
+                "Your notes for " + APPOINTMENTS[i].date + ": ",
+                "Type: " + APPOINTMENTS[i].type + " Event: " + APPOINTMENTS[i].title,
+              );
+              console.log(APPOINTMENTS)
+            }
+            i++
+          }
+        }}
+        markedDates={getMarkedDates(baseDate, APPOINTMENTS)}
+        theme={{
+          calendarBackground: '#f2f2f2' ,
+
+
+          selectedDayBackgroundColor: '#6750a4',
+          selectedDayTextColor: 'white',
+          selectedDotColor: 'purple',
+ 
+ 
+          dayTextColor: '#6750a4',
+          textDisabledColor: '#b99de0',
+          dotColor: 'purple',
+ 
+ 
+          monthTextColor: '#6750a4',
+          textMonthFontWeight: 'bold',
+ 
+ 
+          arrowColor: '#e4e0e3',
+        }}
+ 
+      />
+        <View style={Droidstyles.inputContainer}>
+          <TextInput
+            style = {Droidstyles.eventTextInput}
+            placeholder = 'Your Event Name'
+            placeholderTextColor={'lightgray'}
+            onChangeText = {goalInputHandler}
+            value = {enteredGoalText}>
+          </TextInput>
+
+          <TextInput
+          style = {Droidstyles.typeTextInput}
+          labelName = 'Event Type'
+          placeholder = 'Event Type'
+          placeholderTextColor={'lightgray'}
+          onChangeText = {typeInputHandler}
+          value = {enteredTypeText}>
+          </TextInput>
+        </View>
+        
+       
+        <View style={Droidstyles.buttonContainer}>
        
           <FormButton
             modeValue="contained" 
@@ -196,10 +268,21 @@ export default () => {
      {}
    </View>
  );
+ }
 };
 
+const Droidstyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: '#166088',
+    justifyContent: 'center',
+  },
+  input: {
+    alignItems: 'center'
+  },
+});
 
-const styles = StyleSheet.create({
+const IOSstyles = StyleSheet.create({
  container: {
    flex: 1,
    // backgroundColor: '#166088',
