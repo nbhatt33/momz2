@@ -6,8 +6,8 @@ export interface Dialogue {
     readonly promptsAndNext?: {prompts: userPrompts.UserPrompt, next?: Dialogue}[];
 }
 
-export let brushTeeth: Dialogue = {
-    textOptions: dialogueTextOptions.brushTeeth
+export let closer: Dialogue = {
+    textOptions: dialogueTextOptions.closer
 }
 
 export const changeTag: Dialogue = {
@@ -15,7 +15,7 @@ export const changeTag: Dialogue = {
     promptsAndNext: userPrompts.addTag.map((tag, i) => {
         return {
             prompts: userPrompts.addTag[i],
-            next: brushTeeth
+            next: closer
         }
     })
 }
